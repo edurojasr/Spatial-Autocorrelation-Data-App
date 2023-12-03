@@ -33,6 +33,7 @@ st.markdown(
     like Spatial Autocorrelation in deep analysis.
     """
 )
+st.divider()
 
 
 with st.sidebar:
@@ -92,9 +93,15 @@ if not submit:
 # If valid read the file to a geodataframe
 gdf: gpd.GeoDataFrame = get_geodataframe(file_uploaded_for_gdf, layer=selected_layer)
 wkt_gdf: pd.DataFrame = gdf.to_wkt()
+
+st.header("This is the GeoDataFrame selected for analysis")
 st.dataframe(wkt_gdf)
 
+# TODO: Start data wrangling module
+st.subheader("First, some data wrangling")
+st.write(pd.isnull(gdf))
 
-# Close gdf file copy
+
+# Close layers and gdf copyfile
 file_uploaded_for_layers.close()  # type: ignore
 file_uploaded_for_gdf.close()  # type: ignore
